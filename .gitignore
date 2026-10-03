@@ -1,0 +1,11 @@
+# Local agent / tooling state
+.commandcode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
