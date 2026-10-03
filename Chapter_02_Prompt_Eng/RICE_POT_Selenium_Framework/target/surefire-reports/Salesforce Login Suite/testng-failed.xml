@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Salesforce Login Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Salesforce Login Tests(failed)" verbose="0">
+    <classes>
+      <class name="com.salesforce.tests.ValidLoginTest">
+        <methods>
+          <include name="loadConfiguration"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="verifyLoginWithValidCredentials"/>
+        </methods>
+      </class> <!-- com.salesforce.tests.ValidLoginTest -->
+    </classes>
+  </test> <!-- Salesforce Login Tests(failed) -->
+</suite> <!-- Failed suite [Salesforce Login Suite] -->

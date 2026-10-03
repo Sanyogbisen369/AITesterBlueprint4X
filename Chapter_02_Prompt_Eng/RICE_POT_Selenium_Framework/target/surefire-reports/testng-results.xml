@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="8" failed="0" skipped="1">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-10-04T00:26:04 IST" name="Salesforce Login Suite" finished-at="2026-10-04T00:26:48 IST" duration-ms="44857">
+    <groups>
+    </groups>
+    <test started-at="2026-10-04T00:26:04 IST" name="Salesforce Login Tests" finished-at="2026-10-04T00:26:48 IST" duration-ms="44857">
+      <class name="com.salesforce.tests.InvalidLoginTest">
+        <test-method is-config="true" signature="loadConfiguration()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:04 IST" name="loadConfiguration" finished-at="2026-10-04T00:26:04 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadConfiguration -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:17 IST" name="setUp" finished-at="2026-10-04T00:26:21 IST" duration-ms="4347" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginFailsWithInvalidCredentials(java.lang.String,java.lang.String,java.lang.String)[pri:1, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:21 IST" name="verifyLoginFailsWithInvalidCredentials" description="Invalid credentials are rejected with an error" data-provider="invalidCredentials" finished-at="2026-10-04T00:26:23 IST" duration-ms="2243" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[wrong password]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[qa.automation@example.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Invalid@Pass#2026]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginFailsWithInvalidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:23 IST" name="tearDown" finished-at="2026-10-04T00:26:24 IST" duration-ms="361" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:24 IST" name="setUp" finished-at="2026-10-04T00:26:29 IST" duration-ms="5505" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginFailsWithInvalidCredentials(java.lang.String,java.lang.String,java.lang.String)[pri:1, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:29 IST" name="verifyLoginFailsWithInvalidCredentials" description="Invalid credentials are rejected with an error" data-provider="invalidCredentials" finished-at="2026-10-04T00:26:32 IST" duration-ms="2853" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[unregistered user]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[no.such.user.qa@example.com]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Invalid@Pass#2026]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginFailsWithInvalidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:32 IST" name="tearDown" finished-at="2026-10-04T00:26:32 IST" duration-ms="379" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:32 IST" name="setUp" finished-at="2026-10-04T00:26:37 IST" duration-ms="4565" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginFailsWithInvalidCredentials(java.lang.String,java.lang.String,java.lang.String)[pri:1, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:37 IST" name="verifyLoginFailsWithInvalidCredentials" description="Invalid credentials are rejected with an error" data-provider="invalidCredentials" finished-at="2026-10-04T00:26:38 IST" duration-ms="1108" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[malformed username]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[not-an-email]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Invalid@Pass#2026]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginFailsWithInvalidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:38 IST" name="tearDown" finished-at="2026-10-04T00:26:38 IST" duration-ms="362" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:38 IST" name="setUp" finished-at="2026-10-04T00:26:42 IST" duration-ms="3822" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginFailsWithEmptyCredentials()[pri:2, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:42 IST" name="verifyLoginFailsWithEmptyCredentials" description="Submitting with empty username and password shows an error" finished-at="2026-10-04T00:26:43 IST" duration-ms="585" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginFailsWithEmptyCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:43 IST" name="tearDown" finished-at="2026-10-04T00:26:43 IST" duration-ms="373" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:43 IST" name="setUp" finished-at="2026-10-04T00:26:46 IST" duration-ms="2875" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginFailsWithEmptyPassword()[pri:3, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:46 IST" name="verifyLoginFailsWithEmptyPassword" description="Submitting a username with an empty password shows an error" finished-at="2026-10-04T00:26:48 IST" duration-ms="2042" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginFailsWithEmptyPassword -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.InvalidLoginTest@16d04d3d]" started-at="2026-10-04T00:26:48 IST" name="tearDown" finished-at="2026-10-04T00:26:48 IST" duration-ms="230" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.salesforce.tests.InvalidLoginTest -->
+      <class name="com.salesforce.tests.ValidLoginTest">
+        <test-method is-config="true" signature="loadConfiguration()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:04 IST" name="loadConfiguration" finished-at="2026-10-04T00:26:04 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadConfiguration -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:04 IST" name="setUp" finished-at="2026-10-04T00:26:07 IST" duration-ms="3610" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginPageElementsAreDisplayed()[pri:1, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:07 IST" name="verifyLoginPageElementsAreDisplayed" description="Login page renders username, login button and remember me controls" finished-at="2026-10-04T00:26:07 IST" duration-ms="92" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginPageElementsAreDisplayed -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:07 IST" name="tearDown" finished-at="2026-10-04T00:26:08 IST" duration-ms="284" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:08 IST" name="setUp" finished-at="2026-10-04T00:26:10 IST" duration-ms="2438" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyRememberMeToggle()[pri:2, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:10 IST" name="verifyRememberMeToggle" description="Remember me checkbox can be checked and unchecked" finished-at="2026-10-04T00:26:10 IST" duration-ms="346" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyRememberMeToggle -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:10 IST" name="tearDown" finished-at="2026-10-04T00:26:11 IST" duration-ms="247" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:11 IST" name="setUp" finished-at="2026-10-04T00:26:13 IST" duration-ms="2049" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyUsernameStepRevealsPassword()[pri:3, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:13 IST" name="verifyUsernameStepRevealsPassword" description="Submitting a well-formed username advances to the password step" finished-at="2026-10-04T00:26:13 IST" duration-ms="835" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUsernameStepRevealsPassword -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:13 IST" name="tearDown" finished-at="2026-10-04T00:26:14 IST" duration-ms="245" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:14 IST" name="setUp" finished-at="2026-10-04T00:26:16 IST" duration-ms="2711" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyLoginWithValidCredentials()[pri:4, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:16 IST" name="verifyLoginWithValidCredentials" description="Valid credentials log the user in" finished-at="2026-10-04T00:26:16 IST" duration-ms="1" status="SKIP">
+          <exception class="org.testng.SkipException">
+            <message>
+              <![CDATA[Provide -Dsf.username and -Dsf.password (or SF_USERNAME / SF_PASSWORD) to run valid login]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.SkipException: Provide -Dsf.username and -Dsf.password (or SF_USERNAME / SF_PASSWORD) to run valid login
+at com.salesforce.tests.ValidLoginTest.verifyLoginWithValidCredentials(ValidLoginTest.java:87)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:697)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:1005)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:744)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.SkipException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLoginWithValidCredentials -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.salesforce.tests.ValidLoginTest@3a93b025]" started-at="2026-10-04T00:26:16 IST" name="tearDown" finished-at="2026-10-04T00:26:17 IST" duration-ms="247" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.salesforce.tests.ValidLoginTest -->
+    </test> <!-- Salesforce Login Tests -->
+  </suite> <!-- Salesforce Login Suite -->
+</testng-results>

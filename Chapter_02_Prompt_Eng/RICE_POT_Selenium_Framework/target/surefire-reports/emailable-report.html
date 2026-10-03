@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "https://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">Salesforce Login Suite</th></tr>
+<tr><td><a href="#t0">Salesforce Login Tests</a></td><td class="num">8</td><td class="num attn">1</td><td class="num">0</td><td class="num">0</td><td class="num">44,857</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Salesforce Login Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Salesforce Login Tests &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="1">com.salesforce.tests.ValidLoginTest</td><td><a href="#m0">verifyLoginWithValidCredentials</a></td><td rowspan="1">1791053776952</td><td rowspan="1">1</td></tr><tr><th colspan="4">Salesforce Login Tests &#8212; passed</th></tr><tr class="passedeven"><td rowspan="5">com.salesforce.tests.InvalidLoginTest</td><td><a href="#m1">verifyLoginFailsWithEmptyCredentials</a></td><td rowspan="1">1791053802761</td><td rowspan="1">585</td></tr><tr class="passedeven"><td><a href="#m2">verifyLoginFailsWithEmptyPassword</a></td><td rowspan="1">1791053806599</td><td rowspan="1">2042</td></tr><tr class="passedeven"><td><a href="#m3">verifyLoginFailsWithInvalidCredentials</a></td><td rowspan="3">1791053797465</td><td rowspan="3">1108</td></tr><tr class="passedeven"><td><a href="#m4">verifyLoginFailsWithInvalidCredentials</a></td></tr><tr class="passedeven"><td><a href="#m5">verifyLoginFailsWithInvalidCredentials</a></td></tr><tr class="passedodd"><td rowspan="3">com.salesforce.tests.ValidLoginTest</td><td><a href="#m6">verifyLoginPageElementsAreDisplayed</a></td><td rowspan="1">1791053767695</td><td rowspan="1">92</td></tr><tr class="passedodd"><td><a href="#m7">verifyRememberMeToggle</a></td><td rowspan="1">1791053770516</td><td rowspan="1">346</td></tr><tr class="passedodd"><td><a href="#m8">verifyUsernameStepRevealsPassword</a></td><td rowspan="1">1791053773159</td><td rowspan="1">835</td></tr></tbody>
+</table>
+<h2>Salesforce Login Tests</h2><h3 id="m0">com.salesforce.tests.ValidLoginTest#verifyLoginWithValidCredentials</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.testng.SkipException: Provide -Dsf.username and -Dsf.password (or SF_USERNAME / SF_PASSWORD) to run valid login
+	at com.salesforce.tests.ValidLoginTest.verifyLoginWithValidCredentials(ValidLoginTest.java:87)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 29 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.salesforce.tests.InvalidLoginTest#verifyLoginFailsWithEmptyCredentials</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.salesforce.tests.InvalidLoginTest#verifyLoginFailsWithEmptyPassword</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.salesforce.tests.InvalidLoginTest#verifyLoginFailsWithInvalidCredentials</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th></tr><tr class="param stripe"><td>malformed username</td><td>not-an-email</td><td>Invalid@Pass#2026</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.salesforce.tests.InvalidLoginTest#verifyLoginFailsWithInvalidCredentials</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th></tr><tr class="param stripe"><td>wrong password</td><td>qa.automation@example.com</td><td>Invalid@Pass#2026</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.salesforce.tests.InvalidLoginTest#verifyLoginFailsWithInvalidCredentials</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th><th>Parameter #3</th></tr><tr class="param stripe"><td>unregistered user</td><td>no.such.user.qa@example.com</td><td>Invalid@Pass#2026</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.salesforce.tests.ValidLoginTest#verifyLoginPageElementsAreDisplayed</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.salesforce.tests.ValidLoginTest#verifyRememberMeToggle</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.salesforce.tests.ValidLoginTest#verifyUsernameStepRevealsPassword</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>
