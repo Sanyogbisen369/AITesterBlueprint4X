@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14121f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<!-- app:start -->
+<title>Free Play Picks</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Curated free, top-rated Android games: combat, survival, racing, fighting and in-person multiplayer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  /* Layout: sticky control deck on top, then a responsive grid of game "cartridges", each keyed to its genre colour. */
+  :root {
+    --bg: #14121f;
+    --surface: #1d1a2c;
+    --surface-2: #272339;
+    --line: #37314f;
+    --fg: #ece9f6;
+    --muted: #a49fbd;
+    --accent: #ffb547;
+    --accent-ink: #1b1305;
+    --star: #ffcf5c;
+    --c-combat: #ff6b6b;
+    --c-survival: #7bd389;
+    --c-racing: #ffb547;
+    --c-fighting: #e879f9;
+    --c-inperson: #5cc8ff;
+    --font-display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f2fa; --surface: #ffffff; --surface-2: #ebe7f6; --line: #d8d2ea;
+      --fg: #1c1830; --muted: #5f5a78; --accent: #c46a00; --accent-ink: #ffffff; --star: #c98a00;
+      --c-combat: #d43d3d; --c-survival: #2f8f45; --c-racing: #c46a00; --c-fighting: #a52fbf; --c-inperson: #0f7fb8;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f2fa; --surface: #ffffff; --surface-2: #ebe7f6; --line: #d8d2ea;
+    --fg: #1c1830; --muted: #5f5a78; --accent: #c46a00; --accent-ink: #ffffff; --star: #c98a00;
+    --c-combat: #d43d3d; --c-survival: #2f8f45; --c-racing: #c46a00; --c-fighting: #a52fbf; --c-inperson: #0f7fb8;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 400 16px/1.5 var(--font-body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 10; background: var(--bg);
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+
+  header.top { padding-block: 28px 8px; display: grid; gap: 6px; }
+  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  h1 {
+    font: 700 clamp(30px, 6vw, 46px)/1 var(--font-display);
+    letter-spacing: 0.01em; margin: 0; text-wrap: balance;
+  }
+  h1 .free { color: var(--accent); }
+  .tagline { margin: 0; color: var(--muted); max-width: 62ch; }
+
+  .deck {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: var(--bg);
+    padding-block: 12px;
+    display: grid; gap: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    --c: var(--accent);
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); background: var(--surface);
+    color: var(--fg); border-radius: 999px; padding: 7px 14px;
+    font: 600 14px/1 var(--font-body); cursor: pointer;
+  }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .chip .n { font: 500 12px/1 var(--font-mono); color: var(--muted); }
+  .chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: var(--accent-ink); }
+  .chip[aria-pressed="true"] .dot { background: var(--accent-ink); }
+  .chip[aria-pressed="true"] .n { color: var(--accent-ink); opacity: .75; }
+
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .search { flex: 1 1 220px; min-width: 0; position: relative; }
+  .search input {
+    width: 100%; border: 1px solid var(--line); background: var(--surface); color: var(--fg);
+    border-radius: 10px; padding: 9px 12px; font: 400 15px/1.2 var(--font-body);
+  }
+  select, .btn {
+    border: 1px solid var(--line); background: var(--surface); color: var(--fg);
+    border-radius: 10px; padding: 9px 12px; font: 600 14px/1.2 var(--font-body); cursor: pointer;
+  }
+  .btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  :is(.chip, .btn, select, input, a, .fav):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .status { color: var(--muted); font-size: 14px; padding-block: 14px 4px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  .spotlight {
+    display: grid; gap: 4px; margin-block: 8px;
+    border: 1px solid var(--accent); border-radius: 14px; padding: 14px 16px;
+    background: var(--surface);
+  }
+  .spotlight .eyebrow { font: 600 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+  .grid {
+    display: grid; gap: 14px; padding-block: 10px 32px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+  .card {
+    --c: var(--accent);
+    display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px; min-width: 0; position: relative; overflow: hidden;
+  }
+  .card::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--c); }
+  .card-head { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; }
+  .badge {
+    width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--surface-2); color: var(--c);
+    font: 700 18px/1 var(--font-display); border: 1px solid var(--line);
+  }
+  .card h2 { font: 700 18px/1.2 var(--font-display); margin: 0; text-wrap: balance; }
+  .dev { color: var(--muted); font-size: 13px; }
+  .fav {
+    background: none; border: 0; cursor: pointer; padding: 6px; border-radius: 8px;
+    color: var(--muted); font-size: 22px; line-height: 1;
+  }
+  .fav[aria-pressed="true"] { color: var(--c-combat); }
+  .meta { display: flex; gap: 10px 14px; flex-wrap: wrap; align-items: center; font-size: 14px; }
+  .genre { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+  .rating { font: 500 14px/1 var(--font-mono); font-variant-numeric: tabular-nums; display: inline-flex; gap: 6px; align-items: center; }
+  .stars { color: var(--star); letter-spacing: 1px; }
+  .dl { font: 500 13px/1 var(--font-mono); color: var(--muted); }
+  .blurb { margin: 0; color: var(--fg); font-size: 15px; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
+  .play {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none; border-radius: 10px; padding: 10px 12px;
+    background: var(--surface-2); color: var(--fg); font-weight: 600; border: 1px solid var(--line);
+  }
+  .play:hover { border-color: var(--c); color: var(--c); }
+
+  .empty { text-align: center; color: var(--muted); padding-block: 48px; }
+  footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-block: 18px 32px; max-width: 72ch; }
+  @media (prefers-reduced-motion: no-preference) {
+    .card { transition: transform .15s ease, border-color .15s ease; }
+    .card:hover { transform: translateY(-2px); border-color: var(--c); }
+  }
+</style>
+<!-- app:head-end -->
+</head>
+<body>
+<!-- app:body -->
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1><span class="free">Free</span> Play Picks</h1></div>
+    <p class="tagline">The best free, top-rated Android games in one place: combat, survival, racing, fighting and games to play together in person.</p>
+  </header>
+
+  <div class="deck">
+    <div class="chips" id="chips" role="toolbar" aria-label="Game categories"></div>
+    <div class="tools">
+      <label class="search"><span hidden>Search games</span>
+        <input id="q" type="search" placeholder="Search games, studios or features" autocomplete="off">
+      </label>
+      <select id="sort" aria-label="Sort games">
+        <option value="rating">Top rated</option>
+        <option value="downloads">Most downloaded</option>
+        <option value="name">A to Z</option>
+      </select>
+      <button class="btn" id="favOnly" aria-pressed="false" type="button">♥ My list</button>
+      <button class="btn primary" id="random" type="button">Pick for me</button>
+    </div>
+  </div>
+
+  <div id="spotlight" class="spotlight" hidden></div>
+  <div class="status"><span id="count"></span><span>Ratings are approximate Google Play scores</span></div>
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer>
+    Every game here is free to download from Google Play. Most include optional in-app purchases or ads.
+    Star ratings and download counts are approximate and change over time, so check the store listing before installing.
+    "Get on Google Play" opens a Play Store search for the game.
+  </footer>
+</div>
+
+<script>
+const CATEGORIES = [
+  { id: "all", label: "All games", color: "--accent" },
+  { id: "combat", label: "Combat", color: "--c-combat" },
+  { id: "survival", label: "Survival", color: "--c-survival" },
+  { id: "racing", label: "Racing", color: "--c-racing" },
+  { id: "fighting", label: "Fighting", color: "--c-fighting" },
+  { id: "inperson", label: "In-Person", color: "--c-inperson" },
+];
+
+// downloads are in millions of installs (lower bound of the Play Store bracket)
+const GAMES = [
+  // Combat
+  { name: "Call of Duty: Mobile", dev: "Activision", cat: "combat", rating: 4.3, downloads: 500, blurb: "Classic CoD maps, 5v5 multiplayer, ranked modes and a 100-player battle royale tuned for touch.", tags: ["Online PvP", "Battle royale", "FPS"] },
+  { name: "PUBG Mobile", dev: "Krafton / Level Infinite", cat: "combat", rating: 4.2, downloads: 500, blurb: "The original battle royale: drop in, loot up and be the last squad standing across huge maps.", tags: ["Online PvP", "Battle royale", "Squads"] },
+  { name: "Free Fire", dev: "Garena", cat: "combat", rating: 4.2, downloads: 1000, blurb: "Fast 10-minute battle royale matches that run smoothly even on budget phones.", tags: ["Online PvP", "Low-end friendly"] },
+  { name: "Arena Breakout", dev: "Level Infinite", cat: "combat", rating: 4.3, downloads: 50, blurb: "Tense extraction shooter: raid, grab gear and get out alive with realistic gunplay.", tags: ["Online PvPvE", "Tactical"] },
+  { name: "Delta Force", dev: "TiMi Studio / Level Infinite", cat: "combat", rating: 4.2, downloads: 10, blurb: "Large-scale warfare with vehicles plus an extraction mode, built on the PC shooter.", tags: ["Online PvP", "Vehicles"] },
+  { name: "Blood Strike", dev: "NetEase", cat: "combat", rating: 4.3, downloads: 50, blurb: "Fast-paced hero shooter with battle royale and arcade modes and a high skill ceiling.", tags: ["Online PvP", "Battle royale"] },
+  { name: "Standoff 2", dev: "Axlebolt", cat: "combat", rating: 4.4, downloads: 100, blurb: "Counter-Strike style 5v5 defuse matches with weapon skins and competitive ranks.", tags: ["Online PvP", "Competitive"] },
+  { name: "Genshin Impact", dev: "HoYoverse", cat: "combat", rating: 4.2, downloads: 50, blurb: "Open-world action RPG with elemental combo combat and a huge world to explore.", tags: ["Open world", "Action RPG", "Co-op"] },
+  { name: "Brawl Stars", dev: "Supercell", cat: "combat", rating: 4.2, downloads: 500, blurb: "Quick 3v3 and solo brawls lasting under three minutes, ideal for short sessions.", tags: ["Online PvP", "Short matches"] },
+
+  // Survival
+  { name: "Last Day on Earth: Survival", dev: "Kefir!", cat: "survival", rating: 4.3, downloads: 100, blurb: "Zombie apocalypse survival: gather, craft, build a base and raid dangerous zones.", tags: ["Crafting", "Base building", "Zombies"] },
+  { name: "Grim Soul: Dark Survival RPG", dev: "Brickworks", cat: "survival", rating: 4.4, downloads: 10, blurb: "Dark-fantasy survival with castle building, crafting and brutal enemies.", tags: ["Crafting", "Dark fantasy"] },
+  { name: "Frostborn: Action RPG", dev: "Brickworks", cat: "survival", rating: 4.4, downloads: 10, blurb: "Viking survival with co-op raids, crafting and a fortified longhouse to defend.", tags: ["Co-op", "Crafting", "Vikings"] },
+  { name: "Day R Survival", dev: "tltGames", cat: "survival", rating: 4.4, downloads: 10, blurb: "Cross a post-nuclear USSR managing hunger, radiation, cold and disease.", tags: ["Offline play", "Post-apocalyptic"] },
+  { name: "LifeAfter", dev: "NetEase", cat: "survival", rating: 4.2, downloads: 10, blurb: "Open-world zombie survival with deep crafting, seasons and team play.", tags: ["Open world", "Co-op", "Zombies"] },
+  { name: "Once Human", dev: "Starry Studio", cat: "survival", rating: 4.1, downloads: 10, blurb: "Supernatural open-world survival shooter with base building and co-op.", tags: ["Open world", "Shooter", "Co-op"] },
+  { name: "Into the Dead 2", dev: "PikPok", cat: "survival", rating: 4.4, downloads: 50, blurb: "Story-driven zombie survival runner with tense first-person escapes.", tags: ["Offline play", "Story", "Zombies"] },
+  { name: "Raft Survival: Ocean Nomad", dev: "Treastone", cat: "survival", rating: 4.3, downloads: 50, blurb: "Stranded at sea: expand your raft, fish, fend off sharks and explore islands.", tags: ["Offline play", "Crafting"] },
+
+  // Racing
+  { name: "Asphalt Legends Unite", dev: "Gameloft", cat: "racing", rating: 4.3, downloads: 100, blurb: "Arcade racing with licensed hypercars, nitro stunts and cross-platform multiplayer.", tags: ["Online races", "Hypercars"] },
+  { name: "CSR Racing 2", dev: "NaturalMotion", cat: "racing", rating: 4.5, downloads: 50, blurb: "Drag racing with highly detailed licensed cars, tuning and crew events.", tags: ["Drag racing", "Car tuning"] },
+  { name: "Hill Climb Racing 2", dev: "Fingersoft", cat: "racing", rating: 4.4, downloads: 100, blurb: "Physics-based hill driving with upgradable vehicles and friendly multiplayer cups.", tags: ["Physics", "Casual"] },
+  { name: "Need for Speed No Limits", dev: "Electronic Arts", cat: "racing", rating: 4.2, downloads: 100, blurb: "Street racing, police chases and deep car customisation from the NFS series.", tags: ["Street racing", "Customisation"] },
+  { name: "Beach Buggy Racing 2", dev: "Vector Unit", cat: "racing", rating: 4.4, downloads: 50, blurb: "Kart racing with power-ups and split-screen-style party fun on mobile.", tags: ["Kart racing", "Power-ups"] },
+  { name: "CarX Drift Racing 2", dev: "CarX Technologies", cat: "racing", rating: 4.4, downloads: 50, blurb: "Realistic drifting physics, tandem drift battles and detailed car tuning.", tags: ["Drifting", "Online"] },
+  { name: "Traffic Rider", dev: "Soner Kara", cat: "racing", rating: 4.4, downloads: 100, blurb: "First-person motorbike racing through busy traffic with career missions.", tags: ["Offline play", "Motorbikes"] },
+  { name: "Rebel Racing", dev: "Hutch Games", cat: "racing", rating: 4.5, downloads: 10, blurb: "Road racing on real US routes with licensed cars and tuned handling.", tags: ["Road racing", "Licensed cars"] },
+
+  // Fighting
+  { name: "Shadow Fight 3", dev: "Nekki", cat: "fighting", rating: 4.5, downloads: 100, blurb: "Cinematic 3D martial arts with fluid combos, three fighting styles and a long story.", tags: ["Story", "PvP duels"] },
+  { name: "Shadow Fight 2", dev: "Nekki", cat: "fighting", rating: 4.5, downloads: 100, blurb: "The fan-favourite silhouette fighter with RPG upgrades and boss battles.", tags: ["Offline play", "RPG"] },
+  { name: "Shadow Fight 4: Arena", dev: "Nekki", cat: "fighting", rating: 4.4, downloads: 10, blurb: "Pure PvP: pick three heroes and battle real players in skill-based duels.", tags: ["Online PvP", "Heroes"] },
+  { name: "Mortal Kombat", dev: "Warner Bros. Games", cat: "fighting", rating: 4.2, downloads: 50, blurb: "Collect iconic kombatants, build teams of three and land brutal Fatalities.", tags: ["Team battles", "Collectible"] },
+  { name: "Marvel Contest of Champions", dev: "Kabam", cat: "fighting", rating: 4.3, downloads: 100, blurb: "One-on-one Marvel hero brawls with a huge roster and alliance wars.", tags: ["Marvel", "Alliances"] },
+  { name: "Brawlhalla", dev: "Ubisoft", cat: "fighting", rating: 4.3, downloads: 10, blurb: "Platform fighter in the Smash style with cross-play and 50+ legends.", tags: ["Cross-play", "Platform fighter"] },
+  { name: "Real Steel World Robot Boxing", dev: "Reliance Games", cat: "fighting", rating: 4.3, downloads: 50, blurb: "Giant robot boxing based on the film, with upgradeable bots and tournaments.", tags: ["Robots", "Offline play"] },
+  { name: "Supreme Duelist Stickman", dev: "Neron's Brother", cat: "fighting", rating: 4.3, downloads: 100, blurb: "Chaotic ragdoll stickman fights with two-player mode on one phone.", tags: ["Same-device 2P", "Offline play"] },
+
+  // In-Person (play together in the same room)
+  { name: "Mini Militia - Doodle Army 2", dev: "Miniclip", cat: "inperson", rating: 4.1, downloads: 100, blurb: "2D shooter with local Wi-Fi battles for up to 6 friends, no internet needed.", tags: ["Local Wi-Fi", "Up to 6 players"] },
+  { name: "BombSquad", dev: "Eric Froemling", cat: "inperson", rating: 4.4, downloads: 10, blurb: "Explosive party mini-games for up to 8 players, using phones as controllers.", tags: ["Phones as controllers", "Up to 8 players"] },
+  { name: "Spaceteam", dev: "Sleeping Beast Games", cat: "inperson", rating: 4.3, downloads: 1, blurb: "Co-op shouting game: yell technobabble at friends to keep the ship together.", tags: ["Local Wi-Fi / Bluetooth", "2 to 8 players"] },
+  { name: "Among Us", dev: "Innersloth", cat: "inperson", rating: 4.0, downloads: 500, blurb: "Find the impostor. Host a local game on the same Wi-Fi for a perfect party night.", tags: ["Local Wi-Fi", "Up to 15 players"] },
+  { name: "Ludo King", dev: "Gametion", cat: "inperson", rating: 4.2, downloads: 500, blurb: "The classic board game with pass-and-play on one phone, plus online rooms.", tags: ["Pass-and-play", "Offline play"] },
+  { name: "UNO!", dev: "Mattel163", cat: "inperson", rating: 4.2, downloads: 100, blurb: "Official UNO with private rooms and 2v2 mode to play with friends nearby.", tags: ["Private rooms", "2v2"] },
+  { name: "Stumble Guys", dev: "Scopely", cat: "inperson", rating: 4.1, downloads: 100, blurb: "Knockout obstacle-course party royale. Make a private party with friends.", tags: ["Private parties", "Party game"] },
+  { name: "Chess", dev: "Chess.com", cat: "inperson", rating: 4.7, downloads: 100, blurb: "Play a friend face to face with pass-and-play, plus lessons and puzzles.", tags: ["Pass-and-play", "Offline play"] },
+];
+
+const $ = (s) => document.querySelector(s);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+const state = {
+  cat: CATEGORIES.some((c) => c.id === location.hash.slice(1)) ? location.hash.slice(1) : store.get("fpp.cat", "all"),
+  q: "",
+  sort: store.get("fpp.sort", "rating"),
+  favOnly: false,
+  favs: new Set(store.get("fpp.favs", [])),
+};
+
+const catOf = (id) => CATEGORIES.find((c) => c.id === id);
+const fmtDownloads = (m) => (m >= 1000 ? `${m / 1000}B+` : `${m}M+`);
+const initials = (name) => name.replace(/[^A-Za-z0-9 ]/g, "").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
+const stars = (r) => { const full = Math.round(r); return "★".repeat(full) + "☆".repeat(5 - full); };
+const playUrl = (name) => `https://play.google.com/store/search?q=${encodeURIComponent(name)}&c=apps`;
+const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+function renderChips() {
+  $("#chips").innerHTML = CATEGORIES.map((c) => {
+    const n = c.id === "all" ? GAMES.length : GAMES.filter((g) => g.cat === c.id).length;
+    return `<button class="chip" type="button" data-cat="${c.id}" style="--c: var(${c.color})" aria-pressed="${state.cat === c.id}">
+      <span class="dot"></span>${c.label}<span class="n">${n}</span></button>`;
+  }).join("");
+}
+
+function visibleGames() {
+  const q = state.q.trim().toLowerCase();
+  const list = GAMES.filter((g) =>
+    (state.cat === "all" || g.cat === state.cat) &&
+    (!state.favOnly || state.favs.has(g.name)) &&
+    (!q || [g.name, g.dev, g.blurb, ...g.tags].join(" ").toLowerCase().includes(q)));
+  const by = {
+    rating: (a, b) => b.rating - a.rating || b.downloads - a.downloads,
+    downloads: (a, b) => b.downloads - a.downloads || b.rating - a.rating,
+    name: (a, b) => a.name.localeCompare(b.name),
+  }[state.sort];
+  return list.sort(by);
+}
+
+function cardHtml(g) {
+  const c = catOf(g.cat);
+  const fav = state.favs.has(g.name);
+  return `<article class="card" style="--c: var(${c.color})">
+    <div class="card-head">
+      <div class="badge" aria-hidden="true">${initials(g.name)}</div>
+      <div><h2>${esc(g.name)}</h2><div class="dev">${esc(g.dev)}</div></div>
+      <button class="fav" type="button" data-fav="${esc(g.name)}" aria-pressed="${fav}" aria-label="${fav ? "Remove from" : "Add to"} my list: ${esc(g.name)}">${fav ? "♥" : "♡"}</button>
+    </div>
+    <div class="meta">
+      <span class="genre">${c.label}</span>
+      <span class="rating"><span class="stars" aria-hidden="true">${stars(g.rating)}</span>${g.rating.toFixed(1)}</span>
+      <span class="dl">${fmtDownloads(g.downloads)} installs</span>
+    </div>
+    <p class="blurb">${esc(g.blurb)}</p>
+    <div class="tags">${["Free", ...g.tags].map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+    <a class="play" href="${playUrl(g.name)}" target="_blank" rel="noopener">Get on Google Play ↗</a>
+  </article>`;
+}
+
+function render() {
+  document.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.cat === state.cat));
+  $("#favOnly").setAttribute("aria-pressed", state.favOnly);
+  $("#sort").value = state.sort;
+  const list = visibleGames();
+  const label = catOf(state.cat).label.toLowerCase();
+  $("#count").textContent = `${list.length} ${list.length === 1 ? "game" : "games"} · ${state.cat === "all" ? "all categories" : label}`;
+  $("#grid").innerHTML = list.length
+    ? list.map(cardHtml).join("")
+    : `<p class="empty">${state.favOnly ? "Your list is empty. Tap ♡ on a game to save it here." : "No games match that search. Try another word or category."}</p>`;
+}
+
+$("#chips").addEventListener("click", (e) => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  state.cat = b.dataset.cat; store.set("fpp.cat", state.cat);
+  $("#spotlight").hidden = true; render();
+});
+$("#q").addEventListener("input", (e) => { state.q = e.target.value; render(); });
+$("#sort").addEventListener("change", (e) => { state.sort = e.target.value; store.set("fpp.sort", state.sort); render(); });
+$("#favOnly").addEventListener("click", () => { state.favOnly = !state.favOnly; render(); });
+$("#grid").addEventListener("click", (e) => {
+  const b = e.target.closest(".fav"); if (!b) return;
+  const name = b.dataset.fav;
+  state.favs.has(name) ? state.favs.delete(name) : state.favs.add(name);
+  store.set("fpp.favs", [...state.favs]); render();
+});
+$("#random").addEventListener("click", () => {
+  const pool = visibleGames().length ? visibleGames() : GAMES;
+  const g = pool[Math.floor(Math.random() * pool.length)];
+  const s = $("#spotlight");
+  s.innerHTML = `<span class="eyebrow">Tonight's pick · ${catOf(g.cat).label}</span>
+    <strong>${esc(g.name)}</strong><span>${esc(g.blurb)}</span>
+    <a class="play" href="${playUrl(g.name)}" target="_blank" rel="noopener">Get on Google Play ↗</a>`;
+  s.style.setProperty("--accent", `var(${catOf(g.cat).color})`);
+  s.style.setProperty("--c", `var(${catOf(g.cat).color})`);
+  s.hidden = false;
+});
+
+renderChips();
+render();
+
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+<!-- app:end -->
+</body>
+</html>
