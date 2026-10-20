@@ -1,5 +1,5 @@
 // Caches the app shell so Free Play Picks opens offline once installed.
-const CACHE = "free-play-picks-v1";
+const CACHE = "free-play-picks-v2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png"];
 
 self.addEventListener("install", (e) => {
