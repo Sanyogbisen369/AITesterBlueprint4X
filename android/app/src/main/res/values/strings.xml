@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appName">Free Play Picks</string>
+    <string name="launchUrl">https://sanyogbisen369.github.io/AITesterBlueprint4X/Android_Games_Hub/</string>
+    <string name="providerAuthority">io.github.sanyogbisen369.freeplaypicks.fileprovider</string>
+    <string name="assetStatements" translatable="false">
+        [{ \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+           \"target\": {\"namespace\": \"web\", \"site\": \"https://sanyogbisen369.github.io\"} }]
+    </string>
+</resources>

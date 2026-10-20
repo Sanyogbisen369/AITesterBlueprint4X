@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.sanyogbisen369.freeplaypicks",
+      "sha256_cert_fingerprints": [
+        "6F:2A:D1:A2:7D:33:45:0E:B7:9D:9B:B6:43:D7:1D:D7:89:1C:F6:CC:20:EC:3D:66:28:1A:65:4C:A1:7A:45:AA"
+      ]
+    }
+  }
+]

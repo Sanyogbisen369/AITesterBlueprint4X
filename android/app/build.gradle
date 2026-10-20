@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Signing values come from environment variables (set by the GitHub workflow
+// from repository secrets), so the upload key never lives in the repo.
+def keystorePath = System.getenv("KEYSTORE_PATH")
+
+android {
+    namespace 'io.github.sanyogbisen369.freeplaypicks'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'io.github.sanyogbisen369.freeplaypicks'
+        minSdk 21
+        targetSdk 36
+        versionCode Integer.parseInt(System.getenv("VERSION_CODE") ?: "1")
+        versionName "1.0.${System.getenv("VERSION_CODE") ?: "1"}"
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePath) {
+                storeFile file(keystorePath)
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (keystorePath) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
+}
